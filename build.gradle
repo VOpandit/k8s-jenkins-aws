@@ -34,8 +34,19 @@ dependencies {
 test {
 	useJUnitPlatform()
 }
+
 sonarqube {
     	properties {
         property 'sonar.host.url', 'http://3.108.215.208:9000'
     }
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+    }
+}
+test.finalizedBy jacocoTestReport
+tasks.named('sonarqube').configure {
+    dependsOn test
 }
